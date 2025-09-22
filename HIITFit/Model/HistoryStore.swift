@@ -30,42 +30,20 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct WelcomeView: View {
-    var body: some View {
-        ZStack {
-            VStack {
-                HStack(alignment: .bottom) {
-                VStack(alignment: .leading) {
-                  Text("Get fit")
-                    .font(.largeTitle)
-                  Text("with high intensity interval training")
-                    .font(.headline)
-                }
-                Image("step-up")
-                      .resizedToFill(width: 240, height: 240)
-                      .clipShape(Circle())
-                
-              }
-                Button(action: { }) {
-                  Text("Get Started")
-                  Image(systemName: "arrow.right.circle")
-                }
-                .font(.title2)
-                .padding()
-              
-            }
-            
-            VStack {
-                HeaderView(titleText: "Welcome")
-                Spacer()
-                Button("History") { }
-                  .padding(.bottom)            }
-        }
-    }
+struct ExerciseDay: Identifiable {
+  let id = UUID()
+  let date: Date
+  var exercises: [String] = []
 }
 
-#Preview {
-    WelcomeView()
+struct HistoryStore {
+    var exerciseDays: [ExerciseDay] = []
+    
+    init() {
+        #if DEBUG
+        createDevData()
+        #endif
+    }
 }

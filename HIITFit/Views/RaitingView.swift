@@ -32,40 +32,17 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
+struct RatingView: View {
     var body: some View {
-        ZStack {
-            VStack {
-                HStack(alignment: .bottom) {
-                VStack(alignment: .leading) {
-                  Text("Get fit")
-                    .font(.largeTitle)
-                  Text("with high intensity interval training")
-                    .font(.headline)
-                }
-                Image("step-up")
-                      .resizedToFill(width: 240, height: 240)
-                      .clipShape(Circle())
-                
-              }
-                Button(action: { }) {
-                  Text("Get Started")
-                  Image(systemName: "arrow.right.circle")
-                }
-                .font(.title2)
-                .padding()
-              
-            }
-            
-            VStack {
-                HeaderView(titleText: "Welcome")
-                Spacer()
-                Button("History") { }
-                  .padding(.bottom)            }
+        HStack {
+            ForEach(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { _ in
+                Image(systemName: "waveform.path.ecg")
+                    .foregroundColor(.gray)
+                    .font(.largeTitle)            }
         }
     }
 }
 
-#Preview {
-    WelcomeView()
+#Preview(traits: .sizeThatFitsLayout) {
+    RatingView()
 }

@@ -32,40 +32,25 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
+struct HeaderView: View {
+    let titleText: String
     var body: some View {
-        ZStack {
-            VStack {
-                HStack(alignment: .bottom) {
-                VStack(alignment: .leading) {
-                  Text("Get fit")
-                    .font(.largeTitle)
-                  Text("with high intensity interval training")
-                    .font(.headline)
-                }
-                Image("step-up")
-                      .resizedToFill(width: 240, height: 240)
-                      .clipShape(Circle())
-                
-              }
-                Button(action: { }) {
-                  Text("Get Started")
-                  Image(systemName: "arrow.right.circle")
-                }
-                .font(.title2)
-                .padding()
-              
+        VStack {
+            Text(titleText)
+                .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
+            HStack {
+                Image(systemName: "hand.wave")
+                Image(systemName: "1.circle")
+                Image(systemName: "2.circle")
+                Image(systemName: "3.circle")
+                Image(systemName: "4.circle")
             }
-            
-            VStack {
-                HeaderView(titleText: "Welcome")
-                Spacer()
-                Button("History") { }
-                  .padding(.bottom)            }
-        }
+            .font(.title2)            }
     }
 }
 
-#Preview {
-    WelcomeView()
+
+
+#Preview(traits: .sizeThatFitsLayout) {
+    HeaderView(titleText: "Squat")
 }

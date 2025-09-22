@@ -30,42 +30,33 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
-struct WelcomeView: View {
-    var body: some View {
-        ZStack {
-            VStack {
-                HStack(alignment: .bottom) {
-                VStack(alignment: .leading) {
-                  Text("Get fit")
-                    .font(.largeTitle)
-                  Text("with high intensity interval training")
-                    .font(.headline)
-                }
-                Image("step-up")
-                      .resizedToFill(width: 240, height: 240)
-                      .clipShape(Circle())
-                
-              }
-                Button(action: { }) {
-                  Text("Get Started")
-                  Image(systemName: "arrow.right.circle")
-                }
-                .font(.title2)
-                .padding()
-              
-            }
-            
-            VStack {
-                HeaderView(titleText: "Welcome")
-                Spacer()
-                Button("History") { }
-                  .padding(.bottom)            }
-        }
-    }
+struct Exercise {
+  let exerciseName: String
+  let videoName: String
+
+  enum ExerciseEnum: String {
+    case squat = "Squat"
+    case stepUp = "Step Up"
+    case burpee = "Burpee"
+    case sunSalute = "Sun Salute"
+  }
 }
 
-#Preview {
-    WelcomeView()
+extension Exercise {
+  static let exercises = [
+    Exercise(
+      exerciseName: ExerciseEnum.squat.rawValue,
+      videoName: "squat"),
+    Exercise(
+      exerciseName: ExerciseEnum.stepUp.rawValue,
+      videoName: "step-up"),
+    Exercise(
+      exerciseName: ExerciseEnum.burpee.rawValue,
+      videoName: "burpee"),
+    Exercise(
+      exerciseName: ExerciseEnum.sunSalute.rawValue,
+      videoName: "sun-salute")
+  ]
 }
