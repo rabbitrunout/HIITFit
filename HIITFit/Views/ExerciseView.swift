@@ -34,24 +34,37 @@ import SwiftUI
 import AVKit
 
 struct ExerciseView: View {
+    
     let videoNames = ["squat", "step-up", "burpee", "sun-salute"]
     let exerciseNames = ["Squat", "Step Up", "Burpee", "Sun Salute"]
+    @Binding var selectedTab: Int
     let index: Int
     var exercise: Exercise {
       Exercise.exercises[index]
     }
     let interval: TimeInterval = 30
+    var lastExercise: Bool { index + 1 == Exercise.exercises.count }
+    var startButton: some View { Button("Start Exercise") { } }
+    var doneButton: some View { Button("Done") { selectedTab = lastExercise ? 9 : selectedTab + 1
+        }
+    }
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                HeaderView(titleText: exercise.exerciseName)
+                HeaderView(
+                selectedTab: $selectedTab,
+                titleText: Exercise.exercises[index].exerciseName)
                     .padding(.bottom)
                 VideoPlayerView(videoName: exercise.videoName)
                               .frame(height: geometry.size.height * 0.35)
                               .padding(20)
                 Text(Date().addingTimeInterval(interval), style: .timer)
                   .font(.system(size: geometry.size.height * 0.07))
-                Button("Start/Done") { }
+                
+                HStack(spacing: 150) {
+                startButton
+                doneButton
+                }
                   .font(.title3)
                   .padding()
                 RatingView()
@@ -65,5 +78,5 @@ struct ExerciseView: View {
 }
 
 #Preview {
-    ExerciseView(index: 0)
+    ExerciseView(selectedTab: .constant(1), index: 1)
 }

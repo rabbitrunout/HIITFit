@@ -32,27 +32,35 @@
 
 import SwiftUI
 
-struct HeaderView: View {
-    @Binding var selectedTab: Int // 1
-    let titleText: String
+struct SuccessView: View {
     var body: some View {
-    VStack {
-    Text(titleText)
-    .font(.largeTitle)
-    HStack { // 2
-    ForEach(Exercise.exercises.indices, id: \.self) { index in
-    // 3
-    let fill = index == selectedTab ? ".fill" : ""
-    Image(systemName: "\(index + 1).circle\(fill)") // 4
-    }
-    }
-    .font(.title2)
-    }
+        ZStack {
+              VStack {
+                Image(systemName: "hand.raised.fill")
+                  .resizedToFill(width: 75, height: 75)
+                  .foregroundColor(.purple)
+                Text("High Five!")
+                  .font(.largeTitle)
+                  .fontWeight(.bold)
+                Text("""
+                  Good job completing all four exercises!
+                  Remember tomorrow's another day.
+                  So eat well and get some rest.
+                  """)
+                .foregroundColor(.gray)
+                .multilineTextAlignment(.center)
+              }
+              VStack {
+                Spacer()
+                  Button("Continue") {
+                    
+                  }
+                  .padding()
+              }
+            }
     }
 }
 
-
-
-#Preview(traits: .sizeThatFitsLayout) {
-    HeaderView(selectedTab: .constant(0), titleText: "Squat")
+#Preview {
+    SuccessView()
 }
